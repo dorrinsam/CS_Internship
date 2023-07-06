@@ -44,3 +44,50 @@ A shelf object is a dictionary-like object, which is defined in this module.
 Keys in shelf objects are strings and values are Python objects, that can be handled by the Pickle module.
 The shelve module comes with Python’s standard utility module, so there is no need to install it externally.
 --------------------------------------------------------------------------------------------------------------
+LAB: FINAL FIXES TO WC If you look at the man page for the wc utility, you see
+that two command-line options do very similar things. -c makes the utility
+count the bytes in the file, and -m makes it count characters (which in the
+case of some Unicode characters can be two or more bytes long). In addition,
+if a file is given, it should read from and process that file, but if no file is given,
+it should read from and process stdin.
+Rewrite your version of the wc utility to implement both the distinction
+between bytes and characters and the ability to read from files and standard
+input.
+
+import sys
+def main():
+   num_of_lines, num_of_characters, num_of_words = 0
+   
+   if len(sys.argv) > 1:
+      p = sys.argv[1:]
+      if p[0].startswith('-'):
+        option = p.pop(0).lower().strip()
+      if p:
+        name = p[0]
+   mode = "r"
+   if option == '-c':
+      mode = 'rb'
+   if name:
+      my_file = open(name, mode)
+   else:
+      my_file = sys.stdin
+
+   with my_file:
+      for l in my_file:
+          num_of_lines += 1
+          num_of_characters += len(l)
+          words = l.split()
+          num_of_words += len(words)
+
+   if option in ('-c', '-m'):
+      print('{} characters'.format(num_of_characters))
+   elif option == '-w':
+      print('{} words'.format(num_of_words))
+   elif option == '-l':
+      print('{} lines'.format(num_of_lines))
+   else:
+      print('{0} lines, {1} words, {2} characters'.format(num_of_lines, num_of_words, num_of_characters))
+
+if __name__ == '__main__':
+main()
+------------------------------------------------------------------------------------------------------------
