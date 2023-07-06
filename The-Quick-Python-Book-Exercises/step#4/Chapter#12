@@ -1,1 +1,51 @@
-test
+QUICK CHECK: MANIPULATING PATHS How would you use the os module’s
+functions to take a path to a file called test.log and create a new file path
+in the same directory for a file called test.log.old? 
+
+import os.path
+first_p = os.path.abspath("test.log")
+print(first_p)
+second_p = "{}.{}".format(first_p, "old")
+print(second_p)
+-----------------------------------------------------------------------
+How would you do the
+same thing using the pathlib module?
+
+import pathlib
+first_p = pathlib.Path("test.log")
+abs = first_p.resolve()
+print(abs)
+second_p = str(abs) + ".old"
+print(second_p)
+-----------------------------------------------------------------------
+What path would you get if you created a pathlib Path object from os
+.pardir? Try it and find out.
+
+p = pathlib.Path(os.pardir)
+print(p)
+p.resolve()
+-----------------------------------------------------------------------
+LAB 12: MORE FILE OPERATIONS How might you calculate the total size of all
+files ending with .txt that aren’t symlinks in a directory? If your first answer
+was using os.path, also try it with pathlib, and vice versa.
+Write some code that builds off your solution to move the same .txt files in
+the lab question to a new subdirectory called backup in the same directory.
+
+import pathlib
+first_p = pathlib.Path('.')
+size = 0
+for second_p in first_p.glob('*.txt'):
+if not second_p.is_symlink():
+s += second_p.stat().st_size
+print(size)
+
+import pathlib
+first_p = pathlib.Path('.')
+second_p = first_p.joinpath('BACKUP')
+size = 0
+for third_p in first_p.glob('*.txt'):
+if not third_p.is_symlink():
+size += third_p.stat().st_size
+third_p.rename(second_p.joinpath(third_p.name))
+print(size)
+-------------------------------------------------------------------------
