@@ -35,8 +35,8 @@ import pathlib
 first_p = pathlib.Path('.')
 size = 0
 for second_p in first_p.glob('*.txt'):
-if not second_p.is_symlink():
-s += second_p.stat().st_size
+   if not second_p.is_symlink():
+     size += second_p.stat().st_size
 print(size)
 
 import pathlib
@@ -44,8 +44,8 @@ first_p = pathlib.Path('.')
 second_p = first_p.joinpath('BACKUP')
 size = 0
 for third_p in first_p.glob('*.txt'):
-if not third_p.is_symlink():
-size += third_p.stat().st_size
-third_p.rename(second_p.joinpath(third_p.name))
+   if not third_p.is_symlink():
+     size += third_p.stat().st_size
+     third_p.rename(second_p.joinpath(third_p.name))
 print(size)
 -------------------------------------------------------------------------
