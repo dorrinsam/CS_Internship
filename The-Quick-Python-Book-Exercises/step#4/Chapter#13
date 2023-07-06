@@ -17,12 +17,12 @@ screen.
 
 import mio
 def main():
-mio.capture_output('myfile.txt')
-print('Love doesn't make sense when it is empty!')
-mio.restore_output()
-mio.print_file('myfile.txt')
+    mio.capture_output('myfile.txt')
+    print('Love doesn't make sense when it is empty!')
+    mio.restore_output()
+   mio.print_file('myfile.txt')
 if __name__ == '__main__':
-main()
+   main()
 --------------------------------------------------------------------------------------------------------------
 QUICK CHECK: STRUCT What use cases can you think of in which the struct module would be useful for either
 reading or writing binary data?
