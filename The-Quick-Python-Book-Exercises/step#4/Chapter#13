@@ -1,1 +1,46 @@
-test
+QUICK CHECK: What is the significance of adding a "b" to the file open mode
+string?
+
+The content will be converted to binary. 
+----------------------------------------------------------------------------------------------------------------
+Suppose that you want to open a file named myfile.txt and write some additional data at the end of it.
+What command would you use to open myfile.txt?
+What command would you use to reopen the file to read from the beginning?
+
+open('myfile.txt', 'a')
+open('myfile.txt')
+---------------------------------------------------------------------------------------------------------------
+TRY THIS: REDIRECTING INPUT AND OUTPUT Write some code to use the mio.py
+module above to capture all of the print output of a script to a file named
+myfile.txt, reset the standard output to the screen, and print that file to
+screen.
+
+import mio
+def main():
+mio.capture_output('myfile.txt')
+print('Love doesn't make sense when it is empty!')
+mio.restore_output()
+mio.print_file('myfile.txt')
+if __name__ == '__main__':
+main()
+--------------------------------------------------------------------------------------------------------------
+QUICK CHECK: STRUCT What use cases can you think of in which the struct module would be useful for either
+reading or writing binary data?
+
+While saving the raw data without any changes and reading files with binary content.
+--------------------------------------------------------------------------------------------------------------
+QUICK CHECK: PICKLES Think about why a pickle would or wouldn’t be a good
+solution for the following use cases:
+(A) Saving some state variables from one run to the next -------------> Yes
+(B) Keeping a high-score list for a game -----------------------------> Yes
+(C) Storing usernames and passwords ----------------------------------> No
+(D) Storing a large dictionary of English terms ----------------------> No
+--------------------------------------------------------------------------------------------------------------
+QUICK CHECK: SHELVE Using a shelf object looks very much like using a dictionary. In what ways is using a 
+shelf object different? What disadvantages would you expect there to be in using a shelf object?
+
+Shelve is used to store data when using a relational database is not recommended. 
+A shelf object is a dictionary-like object, which is defined in this module. 
+Keys in shelf objects are strings and values are Python objects, that can be handled by the Pickle module.
+The shelve module comes with Python’s standard utility module, so there is no need to install it externally.
+--------------------------------------------------------------------------------------------------------------
