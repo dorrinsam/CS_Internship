@@ -1,1 +1,83 @@
-test
+TRY THIS: CATCHING EXCEPTIONS Write some code that gets two numbers from
+the user and divides the first number by the second. Check for and catch the
+exception that occurs if the second number is zero (ZeroDivisionError).
+
+first_num = int(input('First number: '))
+second_num = int(input('Second number: '))
+
+try:
+result = first_num / second_num
+except ZeroDivisionError as e:
+print("It cannot be divide by zero.")
+--------------------------------------------------------------------------------------------------------------------------------
+QUICK CHECK: EXCEPTIONS AS CLASSES If MyError inherits from Exception, what will be the difference
+between except Exception as e and except MyError as e?
+
+Exception as e catches any exception that inherits from Exception; however, MyError as e catches MyError exceptions.
+--------------------------------------------------------------------------------------------------------------------------------
+TRY THIS: THE ASSERT STATEMENT Write a simple program that gets a number from the user and then uses the assert
+statement to raise an exception if the number is zero. Test to make sure that the assert fires and then turn it 
+off, using one of the methods mentioned above.
+
+number = int(input('Number is: '))
+assert number != 0, "The number cannot be 0."
+--------------------------------------------------------------------------------------------------------------------------------
+QUICK CHECK: EXCEPTIONS Do Python exceptions force a program to halt?
+Not always.
+Suppose that you want accessing a dictionary x to always return None if a key doesn’t exist in the dictionary
+(that is, if a KeyError exception is raised). What code would you use to achieve that goal?
+
+try:
+x = dict[some_key]
+except KeyError as e:
+x = None
+--------------------------------------------------------------------------------------------------------------------------------
+TRY THIS: EXCEPTIONS What code would you use to create a custom ValueTooLarge exception and raise that exception if the 
+variable x is over 1000?
+
+class ValueTooLarge(Exception):
+pass
+x = 1001
+if x > 1000:
+raise ValueTooLarge()
+--------------------------------------------------------------------------------------------------------------------------------
+QUICK CHECK: CONTEXT MANAGERS Assume that you’re using a context manager in a script that reads and/or writes several files. 
+Which of the following approaches do you think would be best?
+
+Use a with statement for each file that you read or write.
+--------------------------------------------------------------------------------------------------------------------------------
+LAB 14: CUSTOM EXCEPTIONS Think about the module you wrote in chapter 9 to count word frequencies. 
+What errors might reasonably occur in those functions? Refactor those functions to handle those exception conditions appropriately.
+
+class EmptyStringError(Exception):
+   pass
+def clean(l):
+  if not l.strip():
+     raise EmptyStringError()
+  c1 = l.lower()
+  c1 = c1.translate(punct)
+  return c1
+
+def counter(word):
+   counter_2 = {}
+   for w in word:
+      try:
+        count = counter_2.setdefault(w, 0)
+      except TypeError:
+        pass
+      counter_2[w] += 1
+   return counter_2
+
+def word_stats(counter_2):
+    w1 = list(counter_2.items())
+    w1.sort(key=lambda x: x[1])
+    try:
+      least = w1[:5]
+      most = w1[-1:-6:-1]
+    except IndexError as e:
+
+      least = w1
+      most = list(reversed(w1))
+
+   return most, least
+------------------------------------------------------------------------------------------------------------------------------
