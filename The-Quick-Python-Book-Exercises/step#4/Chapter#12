@@ -8,8 +8,7 @@ print(first_p)
 second_p = "{}.{}".format(first_p, "old")
 print(second_p)
 -----------------------------------------------------------------------
-How would you do the
-same thing using the pathlib module?
+How would you do the same thing using the pathlib module?
 
 import pathlib
 first_p = pathlib.Path("test.log")
@@ -18,8 +17,8 @@ print(abs)
 second_p = str(abs) + ".old"
 print(second_p)
 -----------------------------------------------------------------------
-What path would you get if you created a pathlib Path object from os
-.pardir? Try it and find out.
+What path would you get if you created a pathlib Path object from os.pardir? 
+Try it and find out.
 
 p = pathlib.Path(os.pardir)
 print(p)
