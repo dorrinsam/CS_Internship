@@ -1,18 +1,22 @@
 # Part 1: Downloading
+
 from urllib import request
 remote_url = 'https://www.histdata.com/download-free-forex-historical-data/?/excel/1-minute-bar-quotes/eurusd/2018'
 local_file = 'HISTDATA_COM_XLSX_EURUSD_M1_2018.zip'
 request.urlretrieve(remote_url, local_file)
+
 # File begins to download...
 # ('HISTDATA_COM_XLSX_EURUSD_M1_2018.zip'), <http.client.HTTPMessage object at 0x7f363c0e3b50>
-
+----------------------------------------------------------------------------------------------------------------------
 # Part 2: Extracting
+
 import zipfile
 z = zipfile.ZipFile('HISTDATA_COM_XLSX_EURUSD_M12018.zip')
 z.extractall()
-# Now, the file is being extracted.
 
+# Now, the file is being extracted.
+----------------------------------------------------------------------------------------------------------------------
 # Part 3: Opening
 xdg-open DAT_XLSX_EURUSD_M1_2018.xlsx
-
-# Finally, the file is opened by itsformat.
+# Finally, the file is opened by its format.
+----------------------------------------------------------------------------------------------------------------------
