@@ -1,0 +1,27 @@
+# Task 3 f step 4 to be continued ...
+# Part 3 (Opening)
+
+import datetime
+import xlrd
+
+# To start decoding the excel file
+xlrd.xlsx.ensure_elementtree_imported(False,None)
+xlrd.xlsx.Element_has_iter = True
+
+# To start opening
+workbook = xlrd.open_workbook("DAT_XLSX_EURUSD_M1_2018.xlsx")
+worksheet = workbook.sheet_by_index(0)
+
+# To read the structure 
+num_of_rows = worksheet.nrows
+numb_of_columns = worksheet.ncols
+
+# To start adapting 
+for i in range(0, 10):
+    r = worksheet.row_values(i,start_colx = 0,end_colx = None)
+
+# Work as a tuple
+    r[0] = datetime.datetime(*xlrd.xldate_as_tuple(r[0],workbook.datemode)).strftime('%Y-%m-%d %H:%M:%S')
+
+# loading ...
+    print(r)
