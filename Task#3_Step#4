@@ -1,7 +1,7 @@
 import datetime
 import xlrd
 
-# To start decoding the excel file
+# Decoding 
 xlrd.xlsx.ensure_elementtree_imported(False,None)
 xlrd.xlsx.Element_has_iter = True
 
