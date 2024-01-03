@@ -1,5 +1,4 @@
-# Cheat sheet of chapter 2, 3, and 4 of the Python Data Science Handbook.
-# Part 1 ----> NumPy
+# NumPy cheat sheet
 # --------------------------------------------------------------------------------------------
 # Let's create an array from Python list.
 import numpy as np
