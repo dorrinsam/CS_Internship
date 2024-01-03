@@ -1,0 +1,260 @@
+# Pandas cheat sheet
+# --------------------------------------------------------------------------------------------
+import pandas
+pandas.__version__
+# output
+# '1.5.3'
+import numpy as np
+import pandas as pd
+# Let's have some elements WITH THEIR INDICES.
+data = pd.Series([5, 10, 15, 20])
+data
+# output
+# 0 5
+# 1 10
+# 2 15
+# 3 20
+# dtype: int64
+# -----------------------------------------------------------------------------------------
+# Now, let's have ONLY the values.
+data.values
+# output
+# array([ 5, 10, 15, 20])
+# -----------------------------------------------------------------------------------------
+# Now, let's find out what's happening...
+data.index
+# output
+# RangeIndex(start=0, stop=4, step=1)
+# -----------------------------------------------------------------------------------------
+# let's choose an element among them.
+data[2]
+# output
+# 15
+# -----------------------------------------------------------------------------------------
+# let's choose a range of elements among them.
+data[0:3]
+# output
+# 0 5
+# 1 10
+# 2 15
+# dtype: int64
+# ----------------------------------------------------------------------------------------
+# How about choosing the indices BY OURSELEVES?
+data = pd.Series([5, 10, 15, 20], index=['a', 'b', 'c', 'd'])
+data
+# output
+# a 5
+# b 10
+# c 15
+# d 20
+# dtype: int64
+# ----------------------------------------------------------------------------------------
+# Let's leave the indexing process to Pandas.
+pd.Series([2, 4, 6])
+# output
+# 0 2
+# 1 4
+# 2 6
+# dtype: int64
+# ----------------------------------------------------------------------------------------
+# How about having a scalar at each index?
+pd.Series(5000, index=[10, 20, 30])
+# output
+# 10 5000
+# 20 5000
+# 30 5000
+# dtype: int64
+# -------------------------------------------------------------------------------------
+# Let's get the size, shape, and number of dimensions of the array below.
+arr_1 = pd.Index([100, 200, 300, 400, 500])
+print(arr_1.size, arr_1.shape, arr_1.ndim, arr_1.dtype)
+# output
+# 5 (5,) 1 int64
+# --------------------------------------------------------------------------------------
+# Using an intersection between 2 arrays ----> Part 1
+array1 = pd.Index([1, 3, 5, 7, 9])
+array2 = pd.Index([2, 3, 5, 7, 11])
+array1 & array2
+# output
+# <ipython-input-11-d4d342529f98>:4: FutureWarning: Index.__and__ operating as a set operation is deprecated, in the future this will be a logical operation matching Series.__and__.  Use index.intersection(other) instead.
+#   array1 & array2
+# Int64Index([3, 5, 7], dtype='int64')
+# -------------------------------------------------------------------------------------
+# Part 2
+array1 | array2
+# <ipython-input-12-2cd3066db510>:2: FutureWarning: Index.__or__ operating as a set operation is deprecated, in the future this will be a logical operation matching Series.__or__.  Use index.union(other) instead.
+#   array1 | array2
+# Int64Index([1, 2, 3, 5, 7, 9, 11], dtype='int64')
+# ------------------------------------------------------------------------------------
+# Let's define the areas of the 3 cities of Tehran, Shiraz, and Mashhad.
+area = pd.Series({'Tehran': 1723337, 'Shiraz': 695662, 'Mashhad': 423967}, name='area')
+# And define the population of the 3 cities Mashhad, Shiraz, and Esfahan.
+population = pd.Series({'Mashhad': 38332521, 'Shiraz': 26448193, 'Esfahan': 19651127}, name='population')
+# Now, let's see what happens while getting their density.
+population // area
+# output
+# Esfahan NaN
+# Mashhad 90.0
+# Shiraz 38.0
+# Tehran NaN
+# dtype: float64
+# ------------------------------------------------------------------------------------
+# Let's see another example.
+A = pd.Series([2, 4, 6], index=[0, 1, 2])
+B = pd.Series([1, 3, 5], index=[1, 2, 3])
+A * B
+# output
+# 0 NaN
+# 1 4.0
+# 2 18.0
+# 3 NaN
+# dtype: float64
+# -----------------------------------------------------------------------------------
+# What if we want to fill the NaN values with a specific number?
+A.add(B, fill_value=0)
+# Where have the 2.0 and 5.0 values come from?
+# output
+# 0 2.0
+# 1 5.0
+# 2 9.0
+# 3 5.0
+# dtype: float64
+# -----------------------------------------------------------------------------------
+# Let's gather 10 elements by their integers.
+a = pd.Series(range(10), dtype=int)
+a
+# output
+# 0 0
+# 1 1
+# 2 2
+# 3 3
+# 4 4
+# 5 5
+# 6 6
+# 7 7
+# 8 8
+# 9 9
+# dtype: int64
+# -----------------------------------------------------------------------------------
+# What happens if setting he first element to None?
+a[0] = None
+a
+# output
+# 0 NaN
+# 1 1.0
+# 2 2.0
+# 3 3.0
+# 4 4.0
+# 5 5.0
+# 6 6.0
+# 7 7.0
+# 8 8.0
+# 9 9.0
+# dtype: float64
+# ----------------------------------------------------------------------------------
+# In this part, let's get familiar with the concepts below.
+# isnull() ----> Generate a Boolean mask indicating missing values.
+# notnull() ----> Opposite of isnull().
+# dropna() ----> Return a filtered version of the data.
+# fillna() ----> Return a copy of the data with missing values filled or imputed.
+# ----------------------------------------------------------------------------------
+# Let's detect the null values.
+data = pd.Series(["Python", None, 8, ":", np.nan, None])
+data.isnull()
+# output
+# 0 False
+# 1 True
+# 2 False
+# 3 False
+# 4 True
+# 5 True
+# dtype: bool
+# ---------------------------------------------------------------------------------
+# Now, let's detect other values of the array.
+data[data.notnull()]
+# output
+# 0 Python
+# 2 8
+# 3 :
+# dtype: object
+# ---------------------------------------------------------------------------------
+# Let's do the same thing by the dropna() function.
+data.dropna()
+# output
+# 0 Python
+# 2 8
+# 3 :
+# dtype: object
+# ---------------------------------------------------------------------------------
+# Do you remember the indexing process of an array?
+data = pd.Series(["Let's", np.nan, "work", None, "with", "Pandas"], index=list('123456'))
+data
+# output
+# 1 Let's
+# 2 NaN
+# 3 work
+# 4 None
+# 5 with
+# 6 Pandas
+# dtype: object
+# --------------------------------------------------------------------------------
+# Let's fill the NaN values with a number.
+data.fillna(222)
+# output
+# 1 Let's
+# 2 222
+# 3 work
+# 4 222
+# 5 with
+# 6 Pandas
+# dtype: object
+# -------------------------------------------------------------------------------
+# Watch the output below in order to notice the "Forward-fill" method.
+data.fillna(method='ffill')
+# output
+# 1 Let's
+# 2 Let's
+# 3 work
+# 4 work
+# 5 with
+# 6 Pandas
+# dtype: object
+# -------------------------------------------------------------------------------
+# The opposite of this process is called "Back-fill" method.
+data.fillna(method='bfill')
+# output
+1 Let's
+2 work
+3 work
+4 with
+5 with
+6 Pandas
+dtype: object
+# ---------------------------------------------------------------------------------
+# Let’s consider the heights of all US presidents wwith the csv file below.
+!head -4 /content/president_heights.csv
+# output
+# order,name,height(cm)
+# 1,George Washington,189
+# 2,John Adams,170
+# 3,Thomas Jefferson,189
+# ---------------------------------------------------------------------------------
+# Consider reading the file and extracting its information.How will you do this process?
+# By using the Pandas library.
+import pandas as pd
+data = pd.read_csv('/content/president_heights.csv')
+heights = np.array(data['height(cm)'])
+print(heights)
+# output
+# [189 170 189 163 183 171 185 168 173 183 173 173 175 178 183 193 178 173
+# 174 183 183 168 170 178 182 180 183 178 182 188 175 179 183 193 182 183
+# 177 185 188 188 182 185 191 182]
+# --------------------------------------------------------------------------------
+# Let's use some of the aggregations functions.
+print("The mean of the heights is: ", heights.mean())
+print("The lowest height is: ", heights.min())
+print("The highest height is: ", heights.max())
+# output
+# The mean of the heights is: 180.04545454545453
+# The lowest height is: 163
+# The highest height is: 193
