@@ -35,4 +35,4 @@ my_file["MA4"] = my_file.rolling(window=30)["Close"].mean()
 
 
 # Printing the outputs.
-print(my_file.head(40))
+(my_file.head(40))
